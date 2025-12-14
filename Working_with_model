@@ -1,0 +1,47 @@
+
+
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader
+import matplotlib.pyplot as plt
+import numpy as np
+import torch
+import torchvision
+print("Success!")
+
+
+
+
+
+# %%
+
+transform = transforms.Compose([
+    transforms.ToTensor(),
+    transforms.Normalize((0.5, 0.5, .5), (0.5, 0.5, .05))
+])
+
+# %%
+
+train_loader  = datasets.CIFAR10(
+    root='./data',
+    train=True,
+    download=True,
+    transform=transform
+)
+
+test_loader = datasets.CIFAR10(
+    root = './data',
+    train = False,
+    download=True,  
+    transform=transform 
+)
+
+
+#checking sizes 
+print(len(train_loader))
+print(len(test_loader))
+
+#%%
+images, labels = next(iter(train_loader))
+print(f"\nBatch shapes:")
+print(f"Images shape: {images.shape}")  # [batch_size, channels, height, width]
+print(f"Labels shape: {labels.shape}")  # [batch_size]
