@@ -1,0 +1,38 @@
+
+data/
+*.tar.gz
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+cv_env/
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+Thumbs.db
+.DS_Store
+
+# PyTorch/ML models (optional - these can get huge)
+*.pth
+*.pt
+*.model

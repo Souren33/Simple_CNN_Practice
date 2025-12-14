@@ -6,33 +6,46 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 import torchvision
+import torch.nn as nn
+from CNN_class import SimpleCNN
+
+
+# Initialize the model
+model = SimpleCNN()
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
+
+
+
 print("Success!")
 
-
-
-
-
 # %%
-
 transform = transforms.Compose([
     transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, .5), (0.5, 0.5, .05))
+    transforms.Normalize((0.5, 0.5, .5), (0.5, 0.5, .5))
 ])
 
 # %%
 
-train_loader  = datasets.CIFAR10(
+train_loader  = DataLoader(
+datasets.CIFAR10(
     root='./data',
     train=True,
     download=True,
-    transform=transform
+    transform=transform),
+batch_size=32,
+shuffle=True
 )
 
-test_loader = datasets.CIFAR10(
+
+test_loader = DataLoader(
+    datasets.CIFAR10(
     root = './data',
     train = False,
     download=True,  
-    transform=transform 
+    transform=transform),
+    batch_size=32,
+    shuffle=False
 )
 
 
@@ -45,3 +58,6 @@ images, labels = next(iter(train_loader))
 print(f"\nBatch shapes:")
 print(f"Images shape: {images.shape}")  # [batch_size, channels, height, width]
 print(f"Labels shape: {labels.shape}")  # [batch_size]
+
+
+
